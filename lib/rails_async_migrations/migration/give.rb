@@ -17,7 +17,7 @@ module RailsAsyncMigrations
       def restore_original_method
         if valid?
           Take.new(resource_class, method_name).suspend_take do
-            resource_class.define_method(method_name, &method_clone)
+            resource_class.send(:define_method, method_name, &method_clone)
           end
         end
       end

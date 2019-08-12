@@ -30,6 +30,10 @@ RSpec.describe RailsAsyncMigrations::Workers do
   end
 
   context 'through sidekiq' do
+    before do
+      config_worker_as :sidekiq
+    end
+
     context 'with :check_queue' do
       it { is_expected.to be_truthy }
     end
@@ -39,6 +43,24 @@ RSpec.describe RailsAsyncMigrations::Workers do
       let(:args) { [async_schema_migration.id] }
 
       it { expect { subject }.to raise_error(RailsAsyncMigrations::Error) }
+    end
+  end
+
+  context 'through resque' do
+    before do
+      config_worker_as :resque
+    end
+
+    context 'with :check_queue' do
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with :fire_migration' do
+      let(:called_worker) { :fire_migration }
+      let(:args) { [async_schema_migration.id] }
+
+      # Checking that Resque enqueued properly
+      it { is_expected.to be_truthy }
     end
   end
 end

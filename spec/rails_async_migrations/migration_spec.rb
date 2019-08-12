@@ -2,8 +2,8 @@ RSpec.describe RailsAsyncMigrations::Migration do
   let(:resource_class) { FakeClass }
   let(:instance) { resource_class.new }
   let(:method) { :free_method }
-  let(:change_to_true) { resource_class.define_method(method, -> { true }) }
-  let(:change_to_false) { resource_class.define_method(method, -> { false }) }
+  let(:change_to_true) { resource_class.send(:define_method, method, -> { true }) }
+  let(:change_to_false) { resource_class.send(:define_method, method, -> { false }) }
 
   # we reset the class each time
   # as RSpec won't hot-reload it

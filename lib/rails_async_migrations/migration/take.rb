@@ -39,7 +39,7 @@ module RailsAsyncMigrations
       end
 
       def preserve_method_logics
-        resource_class.define_method(clone_method_name, &captured_method)
+        resource_class.send(:define_method, clone_method_name, &captured_method)
       end
 
       def captured_method
@@ -47,7 +47,7 @@ module RailsAsyncMigrations
       end
 
       def overwrite_method
-        resource_class.define_method(method_name, &overwrite_closure)
+        resource_class.send(:define_method, method_name, &overwrite_closure)
       end
 
       def overwrite_closure

@@ -20,6 +20,8 @@ module RailsAsyncMigrations
       case workers_type
       when :sidekiq
         Workers::Sidekiq::CheckQueueWorker.perform_async(*args)
+      when :resque
+        ::Resque.enqueue(Workers::Resque::CheckQueueWorker, *args)
       when :delayed_job
         ::Delayed::Job.enqueue Migration::CheckQueue.new
       end
@@ -29,6 +31,8 @@ module RailsAsyncMigrations
       case workers_type
       when :sidekiq
         Workers::Sidekiq::FireMigrationWorker.perform_async(*args)
+      when :resque
+        ::Resque.enqueue(Workers::Resque::FireMigrationWorker, *args)
       when :delayed_job
         ::Delayed::Job.enqueue Migration::FireMigration.new(*args)
       end
@@ -43,6 +47,10 @@ module RailsAsyncMigrations
       when :sidekiq
         unless defined? ::Sidekiq::Worker
           raise Error, 'Please install Sidekiq before to set it as worker adapter'
+        end
+      when :resque
+        unless defined? ::Resque
+          raise Error, 'Please install Resque before to set it as worker adapter'
         end
       when :delayed_job
         unless defined? ::Delayed::Job

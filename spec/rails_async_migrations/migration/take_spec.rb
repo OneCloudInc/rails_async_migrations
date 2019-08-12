@@ -4,7 +4,7 @@ RSpec.describe RailsAsyncMigrations::Migration::Take do
   let(:method) { :free_method }
   let(:instance) { described_class.new(resource_class, method) }
 
-  let(:change_to_it_passed) { resource_class.define_method(method, -> { 'it passed' }) }
+  let(:change_to_it_passed) { resource_class.send(:define_method, method, -> { 'it passed' }) }
 
   before { change_to_it_passed }
   subject { instance.perform }

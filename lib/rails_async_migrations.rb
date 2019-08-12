@@ -8,6 +8,13 @@ begin
 rescue LoadError
 end
 
+begin
+  require 'resque'
+  require 'rails_async_migrations/workers/resque/check_queue_worker'
+  require 'rails_async_migrations/workers/resque/fire_migration_worker'
+rescue LoadError
+end
+
 require 'rails_async_migrations/connection/active_record'
 require 'rails_async_migrations/config'
 require 'rails_async_migrations/migration'

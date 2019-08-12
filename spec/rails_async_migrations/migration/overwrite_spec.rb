@@ -17,8 +17,16 @@ RSpec.describe RailsAsyncMigrations::Migration::Overwrite do
       before do
         config_worker_as :sidekiq
       end
-      
+
       it { is_expected.to be_instance_of(String) }
+    end
+
+    context 'with resque' do
+      before do
+        config_worker_as :resque
+      end
+
+      it { is_expected.to eq(true) }
     end
   end
 end

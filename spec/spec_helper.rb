@@ -6,6 +6,10 @@ require 'logger'
 require 'database_cleaner'
 require 'rspec-sidekiq'
 require 'delayed_job_active_record'
+require 'fakeredis'
+require 'byebug'
+
+$redis = Redis.new
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = '.rspec_status'
@@ -52,3 +56,4 @@ RSpec::Sidekiq.configure do |config|
   config.enable_terminal_colours = true
   config.warn_when_jobs_not_processed_by_sidekiq = true
 end
+

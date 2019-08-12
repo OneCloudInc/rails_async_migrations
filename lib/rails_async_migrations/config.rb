@@ -7,7 +7,7 @@ module RailsAsyncMigrations
     def initialize
       @taken_methods = %i[change up down]
       @mode = :quiet # :verbose, :quiet
-      @workers = :delayed_job # :sidekiq
+      @workers = :delayed_job # :sidekiq, :resque
     end
   end
 end
