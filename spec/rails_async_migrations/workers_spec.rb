@@ -30,10 +30,6 @@ RSpec.describe RailsAsyncMigrations::Workers do
   end
 
   context 'through sidekiq' do
-    before do
-      config_worker_as :sidekiq
-    end
-
     context 'with :check_queue' do
       it { is_expected.to be_truthy }
     end

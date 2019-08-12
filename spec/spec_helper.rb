@@ -7,7 +7,6 @@ require 'database_cleaner'
 require 'rspec-sidekiq'
 require 'delayed_job_active_record'
 require 'fakeredis'
-require 'byebug'
 
 $redis = Redis.new
 
