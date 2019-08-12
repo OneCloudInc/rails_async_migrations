@@ -5,7 +5,7 @@ module RailsAsyncMigrations
       class CheckQueueWorker
         @queue = :migrations
 
-        def perform
+        def self.perform
           Migration::CheckQueue.new.perform
         end
       end

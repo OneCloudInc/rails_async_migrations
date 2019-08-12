@@ -5,7 +5,7 @@ module RailsAsyncMigrations
       class FireMigrationWorker
         @queue = :migrations
 
-        def perform(migration_id)
+        def self.perform(migration_id)
           Migration::FireMigration.new(
             migration_id
           ).perform
