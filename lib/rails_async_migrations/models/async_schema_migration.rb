@@ -15,4 +15,14 @@ class AsyncSchemaMigration < ActiveRecord::Base
   def trace
     RailsAsyncMigrations::Tracer.new.verbose "Asynchronous migration `#{id}` is now `#{state}`"
   end
+
+  #
+  # Determines the next migration to be run. This allows us to
+  # retry failed migrations.
+  #
+  # @return [AsyncSchemaMigration] The next AsyncSchemaMigration to run
+  #
+  def self.next_migration
+    self.where(state: ['created', 'failed']).order('created_at ASC').first
+  end
 end
