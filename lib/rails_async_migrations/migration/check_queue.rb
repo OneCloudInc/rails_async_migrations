@@ -8,7 +8,6 @@ module RailsAsyncMigrations
       def perform
         Tracer.new.verbose 'Check queue has been triggered'
 
-        return if has_failures?
         return if has_on_going?
         return if no_migration?
 
@@ -40,7 +39,7 @@ module RailsAsyncMigrations
       end
 
       def created_migration
-        @created_migration ||= AsyncSchemaMigration.created.first
+        @created_migration ||= AsyncSchemaMigration.next_migration
       end
 
       def no_migration?
