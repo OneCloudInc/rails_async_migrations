@@ -37,8 +37,8 @@ You can use this library through different background processing technologies
 | Type             | Version | Documentation                                 | Default |
 | ---------------- | ------- | --------------------------------------------- | ------- |
 | **Sidekiq**      | 5.2.3   | https://github.com/mperham/sidekiq            | NO      |
-| **Redis**        | 2.0.0   | https://github.com/resque/resque              | NO      |
-| **Delayed::Job** | 4.1.3   | https://github.com/collectiveidea/delayed_job | YES     |
+| **Redis**        | 2.0.0   | https://github.com/resque/resque              | YES     |
+| **Delayed::Job** | 4.1.3   | https://github.com/collectiveidea/delayed_job | NO      |
 
 Please install and configure one of those before to use this gem. If you use other libraries to setup your workers, please hit me up and I'll create additional adapters for you.
 
